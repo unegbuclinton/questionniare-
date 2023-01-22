@@ -72,9 +72,17 @@ namespace businessImprovementAcademy.api.Models
 
             modelBuilder.Entity<Questionnaire>(entity =>
             {
-                entity.Property(e => e.FinalStep).HasMaxLength(1000);
+                entity.Property(e => e.FinalStepTitle).HasMaxLength(1000);
 
-                entity.Property(e => e.InitialStep).HasMaxLength(1000);
+                entity.Property(e => e.FinalStepContent).HasMaxLength(1000);
+
+                entity.Property(e => e.InitialStepTitle).HasMaxLength(1000);
+
+                entity.Property(e => e.InitialStepContent).HasMaxLength(1000);
+
+                entity.Property(e => e.WelcomeImageUrl)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<QuestionnaireItem>(entity =>

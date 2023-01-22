@@ -11,8 +11,11 @@ namespace businessImprovementAcademy.api.Models
         }
 
         public int Id { get; set; }
-        public string InitialStep { get; set; }
-        public string FinalStep { get; set; }
+        public string InitialStepTitle { get; set; }
+        public string InitialStepContent { get; set; }
+        public string WelcomeImageUrl { get; set; }
+        public string FinalStepTitle { get; set; }
+        public string FinalStepContent { get; set; }
 
         public virtual ICollection<QuestionnaireItem> QuestionnaireItem { get; set; }
     }

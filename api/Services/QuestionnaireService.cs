@@ -17,8 +17,11 @@ namespace businessImprovementAcademy.api.Services
         {
             return new
             {
-                questionnarie = _context.Questionnaire,
+                questionnarie = _context.Questionnaire
+                    .Select(s => new { s.Id, s.InitialStepTitle, s.InitialStepContent, s.FinalStepTitle, s.FinalStepContent, s.WelcomeImageUrl }).FirstOrDefault(),
                 questionnarieItems = _context.QuestionnaireItem
+                    .OrderBy(o => o.Order)
+                    .Select(s => new { s.Id, s.QuestionnaireId, s.Title, s.Subtitle, s.Question, s.ImageUrl, s.Order })
             };
         }
 
