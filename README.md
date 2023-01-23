@@ -1,4 +1,4 @@
-# BusinessResilienceSys
+# Business Improvement Academy
 Initial configuration to run the functions locally.
 
 
