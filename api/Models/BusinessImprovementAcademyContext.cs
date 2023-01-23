@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace businessImprovementAcademy.api.Models
 {
@@ -24,7 +25,7 @@ namespace businessImprovementAcademy.api.Models
         // {
         //     if (!optionsBuilder.IsConfigured)
         //     {
-        //         optionsBuilder.UseSqlServer("Server=localhost;Database=BusinessImprovementAcademy;Trusted_Connection=True;ConnectRetryCount=0");
+        //         optionsBuilder.UseNpgsql("Server=localhost;Database=BusinessImprovementAcademy;Trusted_Connection=True;ConnectRetryCount=0");
         //     }
         // }
 
@@ -111,7 +112,7 @@ namespace businessImprovementAcademy.api.Models
             public BusinessImprovementAcademyContext CreateDbContext(string[] args)
             {
                 var optionsBuilder = new DbContextOptionsBuilder<BusinessImprovementAcademyContext>();
-                optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("SqlConnectionString"));
+                optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("SqlConnectionString"));
 
                 return new BusinessImprovementAcademyContext(optionsBuilder.Options);
             }

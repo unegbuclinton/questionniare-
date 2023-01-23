@@ -17,7 +17,7 @@ namespace businessImprovementAcademy.api
             string SqlConnection = Environment.GetEnvironmentVariable("SqlConnectionString");
             builder.Services.AddScoped<QuestionnaireService>();
             builder.Services.AddDbContext<BusinessImprovementAcademyContext>(
-                options => options.UseSqlServer(SqlConnection));
+                options => options.UseNpgsql(SqlConnection));
 
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
