@@ -16,4 +16,6 @@ Add file local.settings.json at the root level of API folder with the content be
 }
 
 ```
-
+## Install these extensions to VSCode: Azure Functions and c#.
+Press F5 to run .Net build.
+![image](https://user-images.githubusercontent.com/122078390/214037832-066447ed-6154-41c7-ab9a-4ab0d4248159.png)
