@@ -1,6 +1,5 @@
 using System;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using businessImprovementAcademy.api.Models;
 
 namespace businessImprovementAcademy.api.Services.Common

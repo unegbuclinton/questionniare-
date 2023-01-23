@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace businessImprovementAcademy.api.Services
 {
-
     public class QuestionnaireService : ServiceBase
     {
         private readonly BusinessImprovementAcademyContext _context;
@@ -24,7 +23,5 @@ namespace businessImprovementAcademy.api.Services
                     .Select(s => new { s.Id, s.QuestionnaireId, s.Title, s.Subtitle, s.Question, s.ImageUrl, s.Order })
             };
         }
-
     }
-
 }

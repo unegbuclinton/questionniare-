@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace businessImprovementAcademy.api.Models
+﻿namespace businessImprovementAcademy.api.Models
 {
     public partial class AnswerItem
     {
