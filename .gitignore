@@ -4,7 +4,7 @@
 local.settings.json
 # dependencies
 /app/node_modules/
-app/build/
+/app/build/
 /.pnp
 .pnp.js
 
