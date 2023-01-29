@@ -24,6 +24,9 @@ namespace businessImprovementAcademy.api.Functions
             ExecutionContext executionContext,
             ILogger log)
         {
+            req.Headers.Add("Access-Control-Allow-Origin", "*");
+            req.Headers.Add("Access-Control-Allow-Methods", "POST,GET,PUT,PATCH");
+
             var functionName = executionContext.FunctionName;
 
             try
