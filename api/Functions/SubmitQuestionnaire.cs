@@ -6,34 +6,42 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using businessImprovementAcademy.api.Services;
 using System.Net;
+using businessImprovementAcademy.api.Models;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace businessImprovementAcademy.api.Functions
 {
-    public class GetQuestionnaire
+    public class SubmitQuestionnaire
     {
         private readonly QuestionnaireService _questionnarieService;
 
-        public GetQuestionnaire(QuestionnaireService questionnarieService)
+        public SubmitQuestionnaire(QuestionnaireService questionnarieService)
         {
             _questionnarieService = questionnarieService;
         }
 
-        [FunctionName("GetQuestionnaire")]
-        public IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+        [FunctionName("SubmitQuestionnaire")]
+        public async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.System, "post", Route = null)] HttpRequest req,
             ExecutionContext executionContext,
             ILogger log)
         {
             var functionName = executionContext.FunctionName;
+            log.LogInformation("Function " + functionName + " processed a request.");
 
             try
             {
-                var questionnarie = _questionnarieService.GetQuestionnaire();
+                var content = await new StreamReader(req.Body).ReadToEndAsync();
+
+                Answer answer = JsonConvert.DeserializeObject<Answer>(content);
+
+                var inserted = _questionnarieService.InsertAnswer(answer);
 
                 var returnObj = new
                 {
                     meta = new { },
-                    data = questionnarie,
+                    data = inserted,
                     status = new { statusCode = HttpStatusCode.OK, message = "" }
                 };
 

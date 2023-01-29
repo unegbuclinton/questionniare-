@@ -58,27 +58,50 @@ namespace businessImprovementAcademy.api.Models
             {
                 entity.Property(e => e.Question)
                     .IsRequired()
-                    .HasMaxLength(1000);
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Subtitle).HasMaxLength(1000);
+                entity.Property(e => e.Subtitle)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Title).HasMaxLength(1000);
+                entity.Property(e => e.Title)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Answer)
                     .WithMany(p => p.AnswerItem)
                     .HasForeignKey(d => d.AnswerId)
                     .HasConstraintName("FK__AnswerIte__Answe__3D5E1FD2");
+
+                entity.HasOne(d => d.QuestionnaireItem)
+                    .WithMany(p => p.AnswerItem)
+                    .HasForeignKey(d => d.QuestionnaireItemId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__AnswerIte__Quest__5165187F");
             });
 
             modelBuilder.Entity<Questionnaire>(entity =>
             {
-                entity.Property(e => e.FinalStepTitle).HasMaxLength(1000);
+                entity.Property(e => e.FinalStepContent)
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.FinalStepContent).HasMaxLength(1000);
+                entity.Property(e => e.FinalStepTitle)
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.InitialStepTitle).HasMaxLength(1000);
+                entity.Property(e => e.InitialStepContent)
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.InitialStepContent).HasMaxLength(1000);
+                entity.Property(e => e.InitialStepTitle)
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.WelcomeImageUrl)
                     .HasMaxLength(300)
@@ -93,16 +116,22 @@ namespace businessImprovementAcademy.api.Models
 
                 entity.Property(e => e.Question)
                     .IsRequired()
-                    .HasMaxLength(1000);
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Subtitle).HasMaxLength(1000);
+                entity.Property(e => e.Subtitle)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Title).HasMaxLength(1000);
+                entity.Property(e => e.Title)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Questionnaire)
                     .WithMany(p => p.QuestionnaireItem)
                     .HasForeignKey(d => d.QuestionnaireId)
-                    .HasConstraintName("FK__Questionn__Quest__3C69FB99");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Questionn__Quest__4F7CD00D");
             });
         }
 
