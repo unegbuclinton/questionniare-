@@ -23,7 +23,7 @@ namespace businessImprovementAcademy.api.Functions
 
         [FunctionName("SubmitQuestionnaire")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.System, "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
             ExecutionContext executionContext,
             ILogger log)
         {
