@@ -4,14 +4,16 @@ const Button = ({
   text,
   hoverBackground,
   hoverTextColor,
+  backgroundColor,
   scale,
   onClick,
+  textColor,
   borderColor,
 }) => {
   return (
     <button
       onClick={onClick}
-      className={`p-5 md:px-8 md:py-4 font-bold bg-[#000F1F] text-[#fff] border rounded-lg transition ${borderColor}  hover:${hoverTextColor} hover:${hoverBackground} hover:${scale} `}
+      className={`p-5 md:px-8 md:py-4 font-bold ${backgroundColor} ${textColor} border rounded-lg transition ${borderColor}  hover:${hoverTextColor} hover:${hoverBackground} hover:${scale} `}
     >
       {text}
     </button>
