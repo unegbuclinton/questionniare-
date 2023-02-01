@@ -2,21 +2,22 @@ import React, { useContext } from "react";
 import AppContext from "../context/contextApi";
 import Button from "./Button";
 import InputField from "./Input";
+import Table from "./table-component";
 
 const Dashboard = () => {
   const { getAllQuestions } = useContext(AppContext);
   return (
-    <div className="h-screen px-96 bg-[#EEF0EB]">
-      <div className="flex  justify-between items-center pt-20">
-        <p className="text-2xl">Admin Dashboard</p>
+    <div className="px-4 lg:px-72 bg-[#EEF0EB]">
+      <div className=" md:flex  justify-between items-center pt-10">
+        <p className="mb-10 md:mb-0 text-2xl">Admin Dashboard</p>
         <Button text="New Profile" />
       </div>
 
-      <form className="mt-36" action="">
+      <form className="mt-6 md:mt-36" action="">
         <InputField placeholder="Initial step" />
         <InputField placeholder="Final step" />
-
-        <div className="flex justify-end">
+        <Table />
+        <div className="flex justify-end mt-10">
           <Button text="Save" />
         </div>
       </form>
