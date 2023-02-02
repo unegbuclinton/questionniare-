@@ -8,7 +8,7 @@ export function QuestionniareContext({ children }) {
   const getAllQuestions = () => {
     const url = "http://localhost:7071/api/GetQuestionnaire";
     try {
-      getQuestions(url);
+      getQuestions();
     } catch (error) {
       console.log(error);
     }
