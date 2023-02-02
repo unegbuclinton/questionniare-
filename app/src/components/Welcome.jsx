@@ -12,7 +12,7 @@ const Welcome = () => {
   const nextStep = () => {
     console.log("first");
     getAllQuestions();
-    naviagte("first-step");
+    naviagte("/first-step");
   };
   return (
     <div className="h-screen overflow-auto bg-[#EEF0EB] flex flex-col p-5 pt-36 justify-center md:pt-64 lg:py-40  ">
