@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard";
 import FirstStep from "./components/First-step";
 function App() {
   return (
-    <div className="">
+    <div>
       <Router>
         <Routes>
           <Route exact path="/" element={<WelcomePage />} />
