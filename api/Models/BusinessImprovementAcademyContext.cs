@@ -19,6 +19,7 @@ namespace businessImprovementAcademy.api.Models
         public virtual DbSet<AnswerItem> AnswerItem { get; set; }
         public virtual DbSet<Questionnaire> Questionnaire { get; set; }
         public virtual DbSet<QuestionnaireItem> QuestionnaireItem { get; set; }
+        public virtual DbSet<ReportResult> ReportResult { get; set; }
 
         // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         // {
@@ -132,6 +133,16 @@ namespace businessImprovementAcademy.api.Models
                     .HasForeignKey(d => d.QuestionnaireId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Questionn__Quest__4F7CD00D");
+            });
+
+            modelBuilder.Entity<ReportResult>(entity =>
+            {
+                entity.Property(e => e.Comment)
+                    .IsRequired()
+                    .HasMaxLength(4000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GroupPct).HasColumnType("decimal(18, 2)");
             });
         }
 

@@ -36,7 +36,7 @@ namespace businessImprovementAcademy.api.Functions
 
                 Answer answer = JsonConvert.DeserializeObject<Answer>(content);
 
-                var inserted = _questionnarieService.InsertAnswer(answer);
+                var inserted = await _questionnarieService.InsertAnswer(answer);
 
                 var returnObj = new
                 {

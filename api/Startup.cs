@@ -22,6 +22,7 @@ namespace businessImprovementAcademy.api
         {
             string SqlConnection = Environment.GetEnvironmentVariable("SqlConnectionString");
             builder.Services.AddScoped<QuestionnaireService>();
+            builder.Services.AddScoped<EmailService>();
             builder.Services.AddDbContext<BusinessImprovementAcademyContext>(
                 options => options.UseNpgsql(SqlConnection));
 

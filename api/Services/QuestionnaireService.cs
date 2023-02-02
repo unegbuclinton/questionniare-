@@ -26,7 +26,7 @@ namespace businessImprovementAcademy.api.Services
             };
         }
 
-        public bool InsertAnswer(Answer answer)
+        public async Task<bool> InsertAnswer(Answer answer)
         {
             if (!answer.AnswerItem.Any())
                 throw new Exception("Questionnarie has no answers");
@@ -44,6 +44,15 @@ namespace businessImprovementAcademy.api.Services
 
             answer.Id = newAnswer.Id;
             InsertAnswerItem(answer);
+
+            var emailService = new EmailService(GetNewContext());
+            var response = await emailService.SendEmailAsync(
+                Environment.GetEnvironmentVariable("EmailFrom") ?? string.Empty,
+                Environment.GetEnvironmentVariable("EmailFromName") ?? string.Empty,
+                answer.Email,
+                answer.UserFirstName,
+                answer.UserLastName,
+                Environment.GetEnvironmentVariable("SendgridApiKey") ?? string.Empty);
 
             return true;
         }
