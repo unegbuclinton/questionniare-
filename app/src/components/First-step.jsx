@@ -7,14 +7,14 @@ const FirstStep = () => {
   return (
     <div className="text-center overflow-auto bg-[#EEF0EB] h-screen flex items-center p-4 md:p-10 ">
       <div className="max-w-5xl my-0 mx-auto ">
-        <h1 className="text-2xl font-normal md:text-4xl  md:font-normal">
+        <h1 className="text-lg font-normal md:text-2xl  md:font-normal">
           In The Following Analysis Of Your Business, <br /> <br />
           All scores should be honest and true if you are to gain a correct
           reading on your entrepreneurial skills so you can learn from and
           leverage off them. Bear in the mind the 11th commandment:{" "}
         </h1>
 
-        <h2 className="text-base font-semibold md:text-2xl md:font-normal mt-7">
+        <h2 className="text-base font-semibold md:text-2xl md:font-bold mt-7">
           ‘THOU SHALT NOT KID THYSELF’
         </h2>
 

@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
-import AppContext from "../context/contextApi";
+import React from "react";
+
 import Button from "./Button";
 import InputField from "./Input";
 import Table from "./table-component";
 
 const Dashboard = () => {
-  const { getAllQuestions } = useContext(AppContext);
   return (
     <div className="px-4 lg:px-72 bg-[#EEF0EB]">
       <div className=" md:flex  justify-between items-center pt-10">
