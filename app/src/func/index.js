@@ -1,5 +1,7 @@
+import axios from "axios";
+
 export const getQuestions = (url) => {
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => console.log(data));
+  axios.get(url).then((res) => {
+    console.log(res.data);
+  });
 };

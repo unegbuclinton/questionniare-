@@ -7,7 +7,7 @@ import Questionnaire from "./components/Questionniare";
 import CreateProfile from "./components/CreateProfile";
 function App() {
   return (
-    <div className="">
+    <div className="font-poppins">
       <Router>
         <Routes>
           <Route exact path="/" element={<WelcomePage />} />

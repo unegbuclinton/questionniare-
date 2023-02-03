@@ -32,12 +32,7 @@ const Welcome = () => {
       </div>
 
       <div className="mt-10 lg:ml-48 ">
-        <Button
-          onClick={nextStep}
-          text="Get started"
-          hoverBackground="bg-[#fff]"
-          hoverTextColor="text-[#000]"
-        />
+        <Button onClick={nextStep} text="Get started" />
       </div>
     </div>
   );
