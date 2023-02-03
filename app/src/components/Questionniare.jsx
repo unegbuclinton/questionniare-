@@ -11,15 +11,15 @@ const Questionnaire = () => {
   return (
     <div className="h-screen px-5 pt-[28rem] py-16 overflow-auto flex flex-col justify-center items-center bg-[#EEF0EB] lg:pt-28 text-center">
       <img src={img} alt="" className="mb-10" />
-      <h1 className="text-2xl md:text-4xl lg:text-4xl mb-6">
+      <h1 className="text-lg md:text-xl lg:text-2xl mb-6">
         Rate Yourself On The 17 Key{" "}
         <span className="font-bold">Entrepreneurial Strategies</span>{" "}
       </h1>
-      <h2 className="text-xl md:text-2xl lg:text-3xl">
+      <h2 className="text-base md:text-lg lg:text-lg">
         Clarity On And Emotional Attachment Is A big Idea
       </h2>
 
-      <p className="text-base md:text-2xl font-bold mt-10">
+      <p className="text-base md:text-lg font-bold mt-10">
         Where Am I Heading? Am I Completely On What I want The Most?
       </p>
       <div className="flex flex-wrap justify-center gap-4">
@@ -31,6 +31,7 @@ const Questionnaire = () => {
       <div className=" flex justify-between w-full mt-20 md:px-48">
         <Button
           onClick={() => navigate("/first-step")}
+          invert
           text="Back"
           borderColor="border-[#000]"
           textColor="text-[#171C3]"

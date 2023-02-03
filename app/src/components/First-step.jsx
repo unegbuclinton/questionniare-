@@ -21,6 +21,7 @@ const FirstStep = () => {
         <div className="flex justify-between w-full mt-20">
           <Button
             onClick={() => navigate("/")}
+            invert
             text="Back"
             borderColor="border-[#000]"
             scale="scale-90"

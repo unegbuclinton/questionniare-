@@ -8,8 +8,8 @@ const CreateProfile = () => {
     navigate("/");
   };
   return (
-    <div className="bg-[#EEF0EB] h-screen">
-      <div className="p-5 flex flex-col justify-center items-center h-screen  lg:p-96">
+    <div className="bg-[#EEF0EB] overflow-auto pb-10 h-screen flex flex-col justify-center items-center">
+      <div className="p-5 h-screen w-2/4">
         <h1 className="text-3xl w-full font-bold mb-10 text-center text-[#171C33]">
           Create Profile
         </h1>
@@ -21,12 +21,14 @@ const CreateProfile = () => {
           <InputField placeholder="Last Name" />
           <InputField placeholder="Company Name" />
           <InputField placeholder="Email" />
-          <button
-            type="submit"
-            className="w-full bg-[#171C33] rounded-lg text-[#fff] h-20 font-bold text-2xl"
-          >
-            Start
-          </button>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="h-16 w-2/5 bg-[#171C33] rounded-lg text-[#fff]  font-bold text-lg mt-10"
+            >
+              Start
+            </button>
+          </div>
         </form>
       </div>
     </div>
