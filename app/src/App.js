@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard";
 import FirstStep from "./components/First-step";
 function App() {
   return (
-    <div>
+    <div className="font-poppins">
       <Router>
         <Routes>
           <Route exact path="/" element={<WelcomePage />} />
