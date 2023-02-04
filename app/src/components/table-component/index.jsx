@@ -14,8 +14,8 @@ const Table = () => {
     { label: "Question", accessor: "question" },
   ];
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full bg-[#fff] border-collapse">
+    <div className="overflow-x-auto mt-10">
+      <table className="w-full bg-[#fff] border-collapse rounded-bl-2xl rounded-tr-2xl">
         <TableHeader columns={columns} />
         <TableBody columns={columns} tableData={tableData} />
       </table>

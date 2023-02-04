@@ -2,14 +2,14 @@ import React from "react";
 
 const TableBody = ({ tableData, columns }) => {
   return (
-    <tbody className="">
+    <tbody>
       {tableData.map((data) => {
         return (
-          <tr className="" key={data.id}>
-            {columns.map(({ accessor }) => {
+          <tr key={data.id}>
+            {columns.map(({ accessor }, idx) => {
               const tData = data[accessor] ? data[accessor] : "——";
               return (
-                <td className="p-6 border-t " key={accessor}>
+                <td className="p-6 border-t " key={idx}>
                   {tData}
                 </td>
               );

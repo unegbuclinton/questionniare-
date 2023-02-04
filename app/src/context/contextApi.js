@@ -1,23 +1,21 @@
-import { getQuestions } from "../func";
-
-const { createContext } = require("react");
+import axios from "axios";
+const { createContext, useState } = require("react");
 
 const AppContext = createContext();
 
 export function QuestionniareContext({ children }) {
-  const getAllQuestions = () => {
+  const [questions, setQuestions] = useState([]);
+  const getAllQuestions = async () => {
     const url = "api/GetQuestionnaire";
-    try {
-      getQuestions(url);
-    } catch (error) {
-      console.log(error);
-    }
+    const response = await axios.get(url);
+    setQuestions(response.data.data.questionnarieItems);
   };
 
   return (
     <AppContext.Provider
       value={{
         getAllQuestions,
+        questions,
       }}
     >
       {children}

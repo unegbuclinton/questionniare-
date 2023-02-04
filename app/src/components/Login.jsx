@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
 import React from "react";
+import { useNavigate } from "react-router";
 import { loginSchema } from "../validation/Schema";
 import ErrorMessage from "./ErrorMessage";
 import InputField from "./Input";
 const Login = () => {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -12,6 +14,7 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       console.log(values);
+      navigate("/admin-dashboard");
     },
   });
   return (
@@ -25,7 +28,7 @@ const Login = () => {
           className="w-full bg-[#F2F2F2] p-9 pb-12 rounded-xl md:w-2/4"
         >
           <InputField
-            placeholder="Email/User name"
+            placeholder="Email"
             type="text"
             id="email"
             name="email"

@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import FirstStep from "./components/First-step";
 import Questionnaire from "./components/Questionniare";
 import CreateProfile from "./components/CreateProfile";
+import Summary from "./components/Summary";
 function App() {
   return (
     <div className="font-poppins">
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/create-profile" element={<CreateProfile />} />
           <Route exact path="/questionniare" element={<Questionnaire />} />
           <Route exact path="/admin-dashboard" element={<Dashboard />} />
+          <Route exact path="/summary" element={<Summary />} />
         </Routes>
       </Router>
     </div>
