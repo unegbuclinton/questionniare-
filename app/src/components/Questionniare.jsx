@@ -8,13 +8,12 @@ import { useNavigate } from "react-router";
 
 const Questionnaire = () => {
   const [questionniares, setQuestionniares] = useState([]);
-  const [active, setActive] = useState(false);
+
   const [indexNum, setIndexNum] = useState(0);
   const questionNum = Array.from({ length: 10 }, (_, i) => i + 1);
   const navigate = useNavigate();
 
   const answerBtn = (num) => {
-    setActive(true);
     console.log(num);
   };
   const nextQuestion = () => {
@@ -80,7 +79,6 @@ const Questionnaire = () => {
           return (
             <QuestionButton
               onClick={() => answerBtn(num)}
-              background={active && num ? "bg-blue-sapphire-hover " : ""}
               key={idx}
               value={num}
             />
