@@ -3,6 +3,7 @@ using businessImprovementAcademy.api.Models;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace businessImprovementAcademy.api.Services
 {
@@ -45,15 +46,25 @@ namespace businessImprovementAcademy.api.Services
             answer.Id = newAnswer.Id;
             InsertAnswerItem(answer);
 
+            var totalScore = _context.AnswerItem.Where(x => x.AnswerId == answer.Id).Sum(x => x.Score);
+            var nineToTen = _context.AnswerItem.Where(x => x.AnswerId == answer.Id).Count(x => x.Score >= 9);
+            var sixToEight = _context.AnswerItem.Where(x => x.AnswerId == answer.Id).Count(x => x.Score >= 6 && x.Score <= 8);
+            var zeroToFive = _context.AnswerItem.Where(x => x.AnswerId == answer.Id).Count(x => x.Score <= 5);
+            var reportComment = _context.ReportResult.First(x => totalScore >= x.MinScore && totalScore <= x.MaxScore).Comment;
+
             var emailService = new EmailService(GetNewContext());
             var response = await emailService.SendEmailAsync(
                 Environment.GetEnvironmentVariable("EmailFrom") ?? string.Empty,
                 Environment.GetEnvironmentVariable("EmailFromName") ?? string.Empty,
+                Environment.GetEnvironmentVariable("SendgridApiKey") ?? string.Empty,
                 answer.Email,
                 answer.UserFirstName,
                 answer.UserLastName,
-                Environment.GetEnvironmentVariable("SendgridApiKey") ?? string.Empty);
-
+                totalScore,
+                reportComment,
+                nineToTen,
+                sixToEight,
+                zeroToFive);
             return true;
         }
 

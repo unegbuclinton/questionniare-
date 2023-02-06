@@ -1,9 +1,9 @@
 using businessImprovementAcademy.api.Services.Common;
 using businessImprovementAcademy.api.Models;
-using System;
 using System.Threading.Tasks;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System;
 using Newtonsoft.Json;
 
 namespace businessImprovementAcademy.api.Services
@@ -19,10 +19,15 @@ namespace businessImprovementAcademy.api.Services
         public async Task<Response> SendEmailAsync(
             string emailFrom,
             string emailFromName,
+            string apiKey,
             string userEmail,
             string userFirstname,
             string userLastname,
-            string apiKey)
+            int totalScore,
+            string reportComment,
+            int nineTotTen,
+            int sixToEight,
+            int zeroToFive)
         {
             var client = new SendGridClient(apiKey);
 
@@ -32,11 +37,11 @@ namespace businessImprovementAcademy.api.Services
                 {
                     Firstname = userFirstname,
                     Lastname = userLastname,
-                    TotalScore = "50",
-                    ReportComment = "this is a test comment",
-                    NineToTen = "2",
-                    SixToEight = "3",
-                    ZeroToFive = "1"
+                    TotalScore = totalScore.ToString(),
+                    ReportComment = reportComment,
+                    NineToTen = nineTotTen.ToString(),
+                    SixToEight = sixToEight.ToString(),
+                    ZeroToFive = zeroToFive.ToString()
                 }
             };
             var dynamicSerialized = JsonConvert.SerializeObject(newDynamicTemplateData);
@@ -45,6 +50,10 @@ namespace businessImprovementAcademy.api.Services
             msg.SetFrom(new EmailAddress(emailFrom, emailFromName));
             msg.AddTo(new EmailAddress(userEmail, string.Format("{0} {1}", userFirstname, userLastname)));
             msg.SetTemplateId(Environment.GetEnvironmentVariable("TemplateId"));
+
+            var bcc = Environment.GetEnvironmentVariable("SendBcc") ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace(bcc))
+                msg.AddBcc(bcc, Environment.GetEnvironmentVariable("BccDisplayName") ?? string.Empty);
 
             DynamicTemplateData dynamicTemplateData = JsonConvert.DeserializeObject<DynamicTemplateData>(dynamicSerialized);
             msg.SetTemplateData(dynamicTemplateData);
