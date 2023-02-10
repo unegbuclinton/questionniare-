@@ -11,7 +11,7 @@ const FirstStep = () => {
           In The Following Analysis Of Your Business, <br /> <br />
           All scores should be honest and true if you are to gain a correct
           reading on your entrepreneurial skills so you can learn from and
-          leverage off them. Bear in the mind the 11th commandment:{" "}
+          leverage off them. Bear in the mind the 11th commandment:
         </h1>
 
         <h2 className="text-base font-semibold md:text-2xl md:font-bold mt-7">

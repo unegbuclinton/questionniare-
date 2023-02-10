@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "./Button";
 import img from "../images/web.png";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
+import { getAllQuestions } from "../features/QuestionniareSlice";
+import { useDispatch } from "react-redux";
 
 const Welcome = () => {
   const naviagte = useNavigate();
@@ -10,6 +12,10 @@ const Welcome = () => {
   const nextStep = () => {
     naviagte("first-step");
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllQuestions());
+  }, [dispatch]);
   return (
     <div className="h-screen overflow-auto bg-[#EEF0EB] flex flex-col p-5 pt-36 justify-center md:pt-64 lg:py-16  ">
       <div className=" flex flex-col-reverse lg:flex-row max-w-6xl my-0 mx-auto">

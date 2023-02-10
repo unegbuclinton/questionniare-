@@ -1,9 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const TableBody = ({ tableData, columns }) => {
+  const { allQuestion } = useSelector((state) => state.questions);
   return (
     <tbody>
-      {tableData.map((data) => {
+      {allQuestion.map((data) => {
         return (
           <tr key={data.id}>
             {columns.map(({ accessor }, idx) => {

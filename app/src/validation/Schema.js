@@ -17,3 +17,7 @@ export const profileSchema = Yup.object({
     .required("Comapany name is required"),
   email: Yup.string().email("Invalid Email").required("Email is Required"),
 });
+
+export const emailSchema = Yup.object({
+  email: Yup.string().email("Invalid Email").required("Email is Required"),
+});

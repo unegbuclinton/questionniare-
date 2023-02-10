@@ -11,7 +11,7 @@ const InputField = ({
 }) => {
   return (
     <input
-      className="text-lg mt-10 lg:mb-15 bg-transparent border-[#595959] transition focus:border-[#171C33] focus:border-b-2 border-b h-16 outline-none w-full p-3 text-[#171C33]"
+      className="text-base mt-10 lg:mb-15 bg-transparent border-[#595959] transition focus:border-[#171C33] focus:border-b-2 border-b h-16 outline-none w-full p-3 text-[#171C33]"
       placeholder={placeholder}
       name={name}
       value={value}

@@ -7,7 +7,7 @@ import Table from "./table-component";
 const Dashboard = () => {
   const navigate = useNavigate();
   return (
-    <div className="h-screen px-4 lg:px-72 bg-[#EEF0EB]">
+    <div className="h-screen overflow-auto px-4 lg:px-72 bg-[#EEF0EB]">
       <div className=" md:flex  justify-between items-center pt-10">
         <p className="mb-10 md:mb-0 text-2xl">Admin Dashboard</p>
         <Button

@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import React from "react";
 import { useNavigate } from "react-router";
+import { loginDetails } from "../locale";
 import { loginSchema } from "../validation/Schema";
 import ErrorMessage from "./ErrorMessage";
 import InputField from "./Input";
@@ -13,8 +14,15 @@ const Login = () => {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      console.log(values);
-      navigate("/admin-dashboard");
+      if (
+        values.email === loginDetails.userName &&
+        values.password === loginDetails.password
+      ) {
+        console.log("Logged In sucessful");
+        navigate("/admin-dashboard");
+      } else {
+        console.log("credentials is not correct ");
+      }
     },
   });
   return (
