@@ -12,7 +12,11 @@ module.exports = {
         "blue-grey": "rgba(23, 28, 51, 0.4)",
         "danger-red": "#D51414",
         platinum: "#f4f7f0",
+        "milk-grey": "#ccc"
       },
+      boxShadow: {
+        'xl': "-4px 11px 12px -8px rgba(0,0,0,0.59)",
+      }
     },
 
     fontFamily: {

@@ -6,6 +6,7 @@ const initialState = {
   questionAnswers: [],
   isLoading: false,
   questionIndex: 0,
+  activeState : 0
 };
 
 export const getAllQuestions = createAsyncThunk(
@@ -46,6 +47,10 @@ export const questionnireSlice = createSlice({
       }
       state.questionIndex--;
     },
+
+    setActiveState:(state,action)=>{
+      state.activeState = action.payload
+    }
   },
   extraReducers: {
     [getAllQuestions.fulfilled]: (state, action) => {
@@ -71,6 +76,6 @@ export const questionnireSlice = createSlice({
   },
 });
 
-export const { updateScore, nextQuestion, prevQuestion } =
+export const { updateScore, nextQuestion,setActiveState, prevQuestion } =
   questionnireSlice.actions;
 export default questionnireSlice.reducer;
