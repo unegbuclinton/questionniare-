@@ -8,11 +8,10 @@ import { useDispatch } from "react-redux";
 
 const Welcome = () => {
   const naviagte = useNavigate();
-
+  const dispatch = useDispatch();
   const nextStep = () => {
     naviagte("first-step");
   };
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllQuestions());
   }, [dispatch]);

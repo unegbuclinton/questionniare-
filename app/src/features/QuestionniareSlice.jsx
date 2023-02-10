@@ -61,7 +61,6 @@ export const questionnireSlice = createSlice({
 
     [submitAllQuestions.fulfilled]: (state) => {
       state.isLoading = false;
-      console.log("submitted");
     },
     [submitAllQuestions.rejected]: (state) => {
       state.isLoading = false;

@@ -10,6 +10,7 @@ module.exports = {
         "blue-sapphire": "#006983",
         "blue-sapphire-hover": "#0786a6",
         "blue-grey": "rgba(23, 28, 51, 0.4)",
+        "danger-red": "#D51414",
         platinum: "#f4f7f0",
       },
     },

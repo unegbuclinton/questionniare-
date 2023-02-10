@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const TableBody = ({ tableData, columns }) => {
+const TableBody = ({ columns }) => {
   const { allQuestion } = useSelector((state) => state.questions);
+  const questions = allQuestion?.questionnarieItems;
   return (
     <tbody>
-      {allQuestion.map((data) => {
+      {questions?.map((data, idx) => {
         return (
-          <tr key={data.id}>
+          <tr key={idx}>
             {columns.map(({ accessor }, idx) => {
               const tData = data[accessor] ? data[accessor] : "——";
               return (

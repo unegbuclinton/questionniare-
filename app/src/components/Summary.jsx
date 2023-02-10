@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import React from "react";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { submitAllQuestions } from "../features/QuestionniareSlice";
@@ -9,52 +10,55 @@ import InputField from "./Input";
 const Summary = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { questionAnswers, allQuestion } = useSelector(
+  const { questionAnswers, allQuestion, isLoading } = useSelector(
     (state) => state.questions
   );
-  // const [activeButton, setActiveButton] = useState(false);
+  const questions = allQuestion?.questionnarieItems;
+  const { profileInfo } = useSelector((state) => state.profile);
   const formik = useFormik({
     initialValues: {
-      email: "",
+      email: profileInfo.email || "",
     },
     validationSchema: emailSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: () => {
       const body = {
-        userFirstName: "Eduardo",
-        userLastName: "Oliveira",
+        userFirstName: profileInfo.firstname || "",
+        userLastName: profileInfo.lastName || "",
         email: formik.values.email,
         AnswerItem: questionAnswers,
       };
-      dispatch(submitAllQuestions(body));
-      navigate("/thank-you");
+      dispatch(submitAllQuestions(body)).then((data) => {
+        if (data.payload.status === 200) {
+          toast.success("Sent Sucessfully");
+          navigate("/thank-you");
+        } else {
+          toast.error("An error ocurred");
+        }
+      });
     },
   });
-
-  // if (formik.errors.email?.length === 0) {
-  //   setActiveButton(true);
-  // }
-
   return (
     <div className="h-screen overflow-auto px-4 lg:px-60 py-24 bg-[#EEF0EB]">
       <h1 className="text-2xl text-blue-sapphire font-bold mb-5">Summary</h1>
       <div className=" bg-white rounded py-10">
-        <div className=" flex justify-between mx-5 text-base lg:text-2xl py-3 px-5 border-b-2 border-rich-black">
+        <div className=" flex justify-between lg:mx-5 text-base lg:text-2xl py-3 px-5 border-b-2 border-rich-black">
           <h2>Rate yourself on the 17 entrepreneurial strategies</h2>
           <h2> Score</h2>
         </div>
 
-        {allQuestion?.map(({ Title, Question, Id }, idx) => {
+        {questions?.map(({ Title, Question, Id }, idx) => {
           return (
             <div
               key={idx}
-              className=" flex justify-between mx-8 text-base gap-4 lg:text-xl pt-5 pb-4 px-5 border-b border-rich-black"
+              className=" flex justify-between items-center lg:mx-8 text-base gap-4 lg:text-xl pt-5 pb-4 px-5 border-b border-rich-black"
             >
-              <div className="flex justify-between gap-5">
-                <span>{Id} .</span>
+              <div className="flex justify-between gap-7">
+                <span>{Id} </span>
                 <div className="flex flex-col">
-                  <h3 className="font-bold mb-4">{Title}</h3>
-                  <h2>{Question}</h2>
+                  <h3 className="font-bold mb-4 text-blue-sapphire-hover">
+                    {Title}
+                  </h3>
+                  <h2 className="text-blue-grey font-medium">{Question}</h2>
                 </div>
               </div>
               <div>
@@ -85,12 +89,16 @@ const Summary = () => {
         />
         <button
           type="submit"
-          className={`absolute right-0 bottom-14 p-3 md:px-8 md:py-4 text-base font-bold bg-blue-sapphire ${
+          disabled={isLoading}
+          className={`absolute right-0 bottom-14 p-3 md:px-8 md:py-4 text-base font-bold ${
+            isLoading ? "bg-blue-grey" : "bg-blue-sapphire"
+          } ${
             !formik.dirty ? "disabled:opacity-25" : ""
           } text-[#fff] border rounded-lg transition duration-200 hover:bg-blue-sapphire-hover`}
         >
           Send
         </button>
+
         <p className="text-blue-grey pt-5 text-xl">
           Receive your Report via Mail
         </p>

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  profileInfo: [],
+  profileInfo: {},
 };
 
 export const profileInfoSlice = createSlice({
@@ -9,8 +9,8 @@ export const profileInfoSlice = createSlice({
   initialState,
   reducers: {
     profileInfo: (state, action) => {
-      const { firstName, lastName, comapny, email } = action.payload;
-      state.profileInfo.push({ firstName, lastName, comapny, email });
+      const { firstName, lastName, company, email } = action.payload;
+      state.profileInfo = { firstName, lastName, company, email };
     },
   },
 });

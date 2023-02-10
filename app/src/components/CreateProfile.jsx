@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import React from "react";
+import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { profileInfo } from "../features/ProfileSlice";
@@ -26,6 +27,7 @@ const CreateProfile = () => {
         email: values.email,
       };
       dispatch(profileInfo(profileInfos));
+      toast.success("Profile Created");
       navigate("/");
     },
   });

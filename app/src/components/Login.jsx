@@ -1,12 +1,17 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { getAllQuestions } from "../features/QuestionniareSlice";
 import { loginDetails } from "../locale";
 import { loginSchema } from "../validation/Schema";
 import ErrorMessage from "./ErrorMessage";
 import InputField from "./Input";
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [authenticationError, setAuthenticationError] = useState(false);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,10 +23,14 @@ const Login = () => {
         values.email === loginDetails.userName &&
         values.password === loginDetails.password
       ) {
-        console.log("Logged In sucessful");
+        dispatch(getAllQuestions());
+        toast.success("Logged In Sucessfully");
         navigate("/admin-dashboard");
       } else {
-        console.log("credentials is not correct ");
+        setAuthenticationError(true);
+        setTimeout(() => {
+          setAuthenticationError(false);
+        }, 1200);
       }
     },
   });
@@ -31,6 +40,11 @@ const Login = () => {
         <h1 className="text-5xl w-full font-bold mb-10 text-center text-[#171C33]">
           Login
         </h1>
+        {authenticationError && (
+          <p className="text-danger-red text-xl font-semibold mb-3">
+            Sorry! Email/Password is Incorrect
+          </p>
+        )}
         <form
           onSubmit={formik.handleSubmit}
           className="w-full bg-[#F2F2F2] p-9 pb-12 rounded-xl md:w-2/4"
