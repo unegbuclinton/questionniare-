@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Button from "./Button";
 import img from "../images/web.png";
 import { useNavigate } from "react-router-dom";
@@ -12,8 +12,12 @@ const Welcome = () => {
   const nextStep = () => {
     naviagte("first-step");
   };
+  const listener = useRef(true);
   useEffect(() => {
-    dispatch(getAllQuestions());
+    if (listener.current) {
+      listener.current = false;
+      dispatch(getAllQuestions());
+    }
   }, [dispatch]);
   return (
     <div className="h-screen overflow-auto bg-[#EEF0EB] flex flex-col p-5 pt-36 justify-center md:pt-64 lg:py-16  ">

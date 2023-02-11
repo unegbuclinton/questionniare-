@@ -3,10 +3,8 @@ import { getQuestions, submitQuestions } from "../func";
 
 const initialState = {
   allQuestion: [],
-  questionAnswers: [],
   isLoading: false,
   questionIndex: 0,
-  activeState : 0
 };
 
 export const getAllQuestions = createAsyncThunk(
@@ -23,15 +21,11 @@ export const questionnireSlice = createSlice({
   initialState,
   reducers: {
     updateScore: (state, action) => {
-      const { questionnaireItemId, score } = action.payload;
-      const index = state.questionAnswers.findIndex(
-        (item) => item.questionnaireItemId === questionnaireItemId
-      );
-      if (index !== -1) {
-        state.questionAnswers[index] = { questionnaireItemId, score };
-      } else {
-        state.questionAnswers.push({ questionnaireItemId, score });
-      }
+      const { score } = action.payload;
+      const currentquestion =
+        state.allQuestion.questionnarieItems[state.questionIndex];
+
+      currentquestion.score = score;
     },
 
     nextQuestion: (state) => {
@@ -47,15 +41,12 @@ export const questionnireSlice = createSlice({
       }
       state.questionIndex--;
     },
-
-    setActiveState:(state,action)=>{
-      state.activeState = action.payload
-    }
   },
   extraReducers: {
     [getAllQuestions.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.allQuestion = action.payload;
+      state.questionAnswers = action.payload.questionniareItems;
     },
     [getAllQuestions.rejected]: (state) => {
       state.isLoading = false;
@@ -76,6 +67,6 @@ export const questionnireSlice = createSlice({
   },
 });
 
-export const { updateScore, nextQuestion,setActiveState, prevQuestion } =
+export const { updateScore, nextQuestion, prevQuestion } =
   questionnireSlice.actions;
 export default questionnireSlice.reducer;

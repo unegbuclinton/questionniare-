@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { submitAllQuestions } from "../features/QuestionniareSlice";
 import { emailSchema } from "../validation/Schema";
+import Button from "./Button";
+import ErrorMessage from "./ErrorMessage";
 import InputField from "./Input";
 
 const Summary = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { questionAnswers, allQuestion, isLoading } = useSelector(
+  const { questionAnswers, allQuestion } = useSelector(
     (state) => state.questions
   );
   const questions = allQuestion?.questionnarieItems;
@@ -46,7 +48,7 @@ const Summary = () => {
           <h2> Score</h2>
         </div>
 
-        {questions?.map(({ Title, Question, Id }, idx) => {
+        {questions?.map(({ Title, Question, Id, score }, idx) => {
           return (
             <div
               key={idx}
@@ -62,22 +64,16 @@ const Summary = () => {
                 </div>
               </div>
               <div>
-                {questionAnswers.map(({ score }, idx) => {
-                  if (idx === Id - 1)
-                    return (
-                      <h3 key={idx} className="mr-6">
-                        {score}
-                      </h3>
-                    );
-                  return null;
-                })}
+                <h3 key={idx} className="mr-6">
+                  {score}
+                </h3>
               </div>
             </div>
           );
         })}
       </div>
 
-      <form onSubmit={formik.handleSubmit} className="relative">
+      <form onSubmit={formik.handleSubmit}>
         <InputField
           placeholder="Email Address"
           type="email"
@@ -87,21 +83,41 @@ const Summary = () => {
           onBlur={formik.handleBlur}
           value={formik.values.email}
         />
-        <button
-          type="submit"
-          disabled={isLoading}
-          className={`absolute right-0 bottom-14 p-3 md:px-8 md:py-4 text-base font-bold ${
-            isLoading ? "bg-blue-grey" : "bg-blue-sapphire"
-          } ${
-            !formik.dirty ? "disabled:opacity-25" : ""
-          } text-[#fff] border rounded-lg transition duration-200 hover:bg-blue-sapphire-hover`}
-        >
-          Send
-        </button>
+        <div>
+          {formik.touched.email && formik.errors.email ? (
+            <ErrorMessage className="text-[#FF0000] mt-4 text-base font-medium">
+              {formik.errors.email}
+            </ErrorMessage>
+          ) : null}
+        </div>
 
         <p className="text-blue-grey pt-5 text-xl">
           Receive your Report via Mail
         </p>
+
+        <div className=" flex justify-between w-full mt-20 ">
+          <Button
+            type="button"
+            onClick={() => {
+              navigate("/questionniare");
+            }}
+            invert
+            text="Back"
+            borderColor="border-[#000]"
+            textColor="text-[#171C3]"
+            scale="scale-90"
+            hoverBackground="bg-[#6174D3]"
+          />
+
+          <Button
+            type="submit"
+            text="Send"
+            borderColor="border-[#000]"
+            textColor="text-[#171C3]"
+            scale="scale-90"
+            hoverBackground="bg-[#6174D3]"
+          />
+        </div>
       </form>
     </div>
   );

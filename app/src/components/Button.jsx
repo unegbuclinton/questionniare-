@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button = ({ text, onClick, invert, disabled, display }) => {
+const Button = ({ text, onClick, invert, disabled, type, display }) => {
   const regular = `p-4 md:px-8 md:py-4 text-base font-bold ${
     disabled ? " bg-blue-grey" : "bg-blue-sapphire"
   }  ${display} text-[#fff] border rounded-lg transition cursor-pointer duration-200 ${
@@ -13,6 +13,7 @@ const Button = ({ text, onClick, invert, disabled, display }) => {
     <button
       disabled={disabled}
       onClick={onClick}
+      type={type}
       className={invert ? inverted : regular}
     >
       {text}
