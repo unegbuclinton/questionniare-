@@ -12,9 +12,7 @@ import InputField from "./Input";
 const Summary = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { questionAnswers, allQuestion } = useSelector(
-    (state) => state.questions
-  );
+  const { getAnswers, allQuestion } = useSelector((state) => state.questions);
   const questions = allQuestion?.questionnarieItems;
   const { profileInfo } = useSelector((state) => state.profile);
   const formik = useFormik({
@@ -27,7 +25,7 @@ const Summary = () => {
         userFirstName: profileInfo.firstname || "",
         userLastName: profileInfo.lastName || "",
         email: formik.values.email,
-        AnswerItem: questionAnswers,
+        AnswerItem: getAnswers,
       };
       dispatch(submitAllQuestions(body)).then((data) => {
         if (data.payload.status === 200) {

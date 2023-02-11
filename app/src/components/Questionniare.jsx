@@ -45,7 +45,7 @@ const Questionnaire = () => {
           <QuestionButton
             scoreValue={questions[questionIndex]?.score}
             btns={questionNum}
-            questionId={questions[questionIndex]?.QuestionnaireId}
+            id={questions[questionIndex]?.Id}
           />
         </div>
 

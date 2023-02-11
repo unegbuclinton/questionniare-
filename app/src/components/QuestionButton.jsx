@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { getAnswers, updateScore } from "../features/QuestionniareSlice";
 
-const QuestionButton = ({ btns, scoreValue }) => {
+const QuestionButton = ({ btns, scoreValue, id }) => {
   const dispatch = useDispatch();
   return (
     <>
@@ -11,7 +11,7 @@ const QuestionButton = ({ btns, scoreValue }) => {
           <button
             key={index}
             onClick={() => {
-              // dispatch(getAnswers({}));
+              dispatch(getAnswers({ questionnaireItemId: id, score }));
               dispatch(updateScore({ score }));
             }}
             className={`w-[20px] h-[20px] p-7 ${

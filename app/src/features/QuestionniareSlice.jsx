@@ -30,12 +30,14 @@ export const questionnireSlice = createSlice({
     },
 
     getAnswers: (state, action) => {
-      const { id, score } = action.payload;
-      const index = state.getAnswers.findIndex((item) => item.id === id);
+      const { questionnaireItemId, score } = action.payload;
+      const index = state.getAnswers.findIndex(
+        (item) => item.questionnaireItemId === questionnaireItemId
+      );
       if (index !== -1) {
-        state.getAnswers[index] = { id, score };
+        state.getAnswers[index] = { questionnaireItemId, score };
       } else {
-        state.getAnswers.push({ id, score });
+        state.getAnswers.push({ questionnaireItemId, score });
       }
     },
     nextQuestion: (state) => {
