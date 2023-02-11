@@ -4,6 +4,7 @@ import { getQuestions, submitQuestions } from "../func";
 const initialState = {
   allQuestion: [],
   isLoading: false,
+  getAnswers: [],
   questionIndex: 0,
 };
 
@@ -28,6 +29,15 @@ export const questionnireSlice = createSlice({
       currentquestion.score = score;
     },
 
+    getAnswers: (state, action) => {
+      const { id, score } = action.payload;
+      const index = state.getAnswers.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        state.getAnswers[index] = { id, score };
+      } else {
+        state.getAnswers.push({ id, score });
+      }
+    },
     nextQuestion: (state) => {
       if (state.questionIndex === state.allQuestion.length - 1) {
         return state.allQuestion.length - 1;
@@ -42,31 +52,55 @@ export const questionnireSlice = createSlice({
       state.questionIndex--;
     },
   },
-  extraReducers: {
-    [getAllQuestions.fulfilled]: (state, action) => {
+
+  extraReducers: (builder) => {
+    builder.addCase(getAllQuestions.fulfilled, (state, action) => {
       state.isLoading = false;
       state.allQuestion = action.payload;
       state.questionAnswers = action.payload.questionniareItems;
-    },
-    [getAllQuestions.rejected]: (state) => {
-      state.isLoading = false;
-    },
-    [getAllQuestions.pending]: (state) => {
+    });
+    builder.addCase(getAllQuestions.pending, (state) => {
       state.isLoading = true;
-    },
-
-    [submitAllQuestions.fulfilled]: (state) => {
+    });
+    builder.addCase(getAllQuestions.rejected, (state) => {
       state.isLoading = false;
-    },
-    [submitAllQuestions.rejected]: (state) => {
+    });
+    builder.addCase(submitAllQuestions.fulfilled, (state) => {
       state.isLoading = false;
-    },
-    [submitAllQuestions.pending]: (state) => {
+    });
+    builder.addCase(submitAllQuestions.pending, (state) => {
       state.isLoading = true;
-    },
+    });
+    builder.addCase(submitAllQuestions.rejected, (state, action) => {
+      state.isLoading = false;
+    });
   },
 });
+//   extraReducers: {
+//     [getAllQuestions.fulfilled]: (state, action) => {
+//       state.isLoading = false;
+//       state.allQuestion = action.payload;
+//       state.questionAnswers = action.payload.questionniareItems;
+//     },
+//     [getAllQuestions.rejected]: (state) => {
+//       state.isLoading = false;
+//     },
+//     [getAllQuestions.pending]: (state) => {
+//       state.isLoading = true;
+//     },
 
-export const { updateScore, nextQuestion, prevQuestion } =
+//     [submitAllQuestions.fulfilled]: (state) => {
+//       state.isLoading = false;
+//     },
+//     [submitAllQuestions.rejected]: (state) => {
+//       state.isLoading = false;
+//     },
+//     [submitAllQuestions.pending]: (state) => {
+//       state.isLoading = true;
+//     },
+//   },
+// });
+
+export const { updateScore, nextQuestion, getAnswers, prevQuestion } =
   questionnireSlice.actions;
 export default questionnireSlice.reducer;

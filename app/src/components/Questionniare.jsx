@@ -43,8 +43,9 @@ const Questionnaire = () => {
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <QuestionButton
-            id={questions[questionIndex]?.score}
+            scoreValue={questions[questionIndex]?.score}
             btns={questionNum}
+            questionId={questions[questionIndex]?.QuestionnaireId}
           />
         </div>
 
